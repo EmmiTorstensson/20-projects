@@ -66,7 +66,25 @@ function sortByRichest() {
     updateDOM(); 
 }
 
+// Show only millionairs
+function showMillionairs() {
+    data = data.filter(user => user.money > 1000000);
+
+    updateDOM();
+}
+
+// Calculate total wealth
+function calcTotalWealth() {
+    const total = data.reduce((acc, user) => (acc += user.money), 0)
+
+    const totalEl = document.createElement('div');
+    totalEl.innerHTML = `<h3>Total Wealth: <strong>${formatMoney(total)}</strong></h3>`;
+    main.appendChild(totalEl)
+}
+
 // Event listneres
 addUserBtn.addEventListener('click', getRandomUser)
 doubleBtn.addEventListener('click', doubleMoney)
 sortBtn.addEventListener('click', sortByRichest)
+showMillionairsBtn.addEventListener('click', showMillionairs)
+calculateWealthBtn.addEventListener('click', calcTotalWealth)
