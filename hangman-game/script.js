@@ -7,15 +7,24 @@ const notification = document.getElementById('notification-container')
 
 const figureParts = document.querySelectorAll('.figure-part');
 
-const words = ['application', 'programming', 'interface'];
-
-let selectedWord = words[Math.floor(Math.random() * words.length)]
+let selectedWord;
 
 const correctLetters = [];
 const wrongLetters = [];
 
+// Get a random word from random-word-api
+function getRandomWord() {
+    fetch('https://random-word-api.herokuapp.com/word?number=1')
+    .then(res => res.json())
+    .then(data => {
+        selectedWord = data[0]
+        console.log(selectedWord);
+    })
+}
+
 // Show hidden word
 function displayWord() {
+
      wordEl.innerHTML = `
      ${selectedWord
         .split('')
@@ -103,7 +112,7 @@ playAgainBtn.addEventListener('click', () => {
     correctLetters.splice(0);
     wrongLetters.splice(0);
 
-    selectedWord = words[Math.floor(Math.random() * words.length)];
+    getRandomWord();
 
     displayWord();
 
@@ -112,4 +121,5 @@ playAgainBtn.addEventListener('click', () => {
     popup.style.display = 'none'
 })
 
+getRandomWord();
 displayWord();
