@@ -84,18 +84,22 @@ function addMealToDOM(meal) {
 
     single_mealEl.innerHTML = `
         <div class="single-meal">
+            <div class="flex center-content">
             <h2>${meal.strMeal}</h2>
             <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+            </div>
             <div class="single-meal-info">
                 ${meal.strCategory ? `<p>${meal.strCategory}</p>` : ''}
                 ${meal.strArea ? `<p>${meal.strArea}</p>` : ''}
             </div>
             <div class="main">
+                <div class="ing-list">
+                    <h3>Ingredients</h3>
+                    <ul>
+                        ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                    </ul>
+                </div>
                 <p>${meal.strInstructions}</p>
-                <h3>Ingredients</h3>
-                <ul>
-                    ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                </ul>
             </div>
 
         </div>
