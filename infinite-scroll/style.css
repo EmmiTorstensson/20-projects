@@ -12,6 +12,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 100px;
 }
 
 h1, h2 {
@@ -32,6 +35,7 @@ h1 {
 .filter {
     width: 100%;
     padding: 12px;
+    font-size: 16px;
 }
 
 .post {
@@ -52,7 +56,7 @@ h1 {
 
 .post .post-body {
     margin: 15px 0 0;
-    line-height: 1.3px;
+    line-height: 1.3;
 }
 
 .post .post-info {
@@ -92,7 +96,7 @@ h1 {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    margin: 5px;
+    margin: 4px;
     animation: bounce .5s ease-in infinite;
 }
 
@@ -111,7 +115,7 @@ h1 {
     }
 
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-10px);
     }
 }
 
