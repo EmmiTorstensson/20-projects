@@ -55,6 +55,7 @@ select:focus, button:focus, input:focus {
     transform: translateY(-100%);
 }
 
+
 .container {
     background-color: #34495e;
     padding: 20px;
@@ -74,7 +75,7 @@ select:focus, button:focus, input:focus {
 }
 
 .container h2 {
-    margin: 0;
+    margin: 20px 0;
 }
 
 .container input {

@@ -16,6 +16,11 @@ let score = 0;
 // Init time
 let time = 10; 
 
+let level = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'medium';
+
+// Set difficulty select value
+difficultySelect.value = localStorage.getItem('difficulty') !==null ? localStorage.getItem('difficulty') : 'medium';
+
 // focus on input from start
 text.focus();
 
@@ -77,11 +82,22 @@ text.addEventListener('input', e => {
 
         e.target.value = '';
 
-        time += 5;
+        if(level === 'hard') {
+            time += 2;
+        } else if(level === 'medium') {
+            time += 4;
+        } else {
+            time += 5;
+        }
     }
 })
 
 settingsBtn.addEventListener('click', () => {
     settings.classList.toggle('hide')
 
+})
+
+settingsForm.addEventListener('change', e => {
+    level = e.target.value;
+    localStorage.setItem('difficulty', level)
 })
