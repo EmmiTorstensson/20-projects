@@ -26,7 +26,7 @@ select {
     background-color: #a7c5e3;
 }
 
-select:focus, button:focus {
+select:focus, button:focus, input:focus {
     outline: 0;
 }
 

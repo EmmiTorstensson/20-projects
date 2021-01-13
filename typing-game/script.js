@@ -2,7 +2,7 @@ const word = document.getElementById('word');
 const text = document.getElementById('text');
 const scoreEl = document.getElementById('score');
 const timeEl = document.getElementById('time');
-const endGameEl = document.getElementById('end-game');
+const endGameEl = document.getElementById('end-game-container');
 const settingsBtn = document.getElementById('settings-btn');
 const settings = document.getElementById('settings');
 const settingsForm = document.getElementById('settings-form');
@@ -15,6 +15,12 @@ let score = 0;
 
 // Init time
 let time = 10; 
+
+// focus on input from start
+text.focus();
+
+// Start counting down
+const timeInterval = setInterval(updateTime, 1000);
 
 // Get a random word from https://random-word-api.herokuapp.com
 function getRandomWord() {
@@ -32,9 +38,30 @@ function addWordToDOM(randomWord) {
     word.innerText = randomWord
 }
 
+// update scort
 function updateScore() {
     score++;
     scoreEl.innerText = score;
+}
+
+// Update time 
+function updateTime() {
+    time--;
+    timeEl.innerText = time + 's';
+
+    if( time === 0) {
+        clearInterval(timeInterval)
+        gameOver()
+    } 
+}
+
+function gameOver() {
+    endGameEl.innerHTML = `
+        <h1>Time ran out</h1>
+        <p>Your final score is ${score}</p>
+        <button onClick="location.reload()">Reload</button>
+    `;
+    endGameEl.style.display = 'flex';
 }
 
 getRandomWord()
@@ -49,6 +76,8 @@ text.addEventListener('input', e => {
         updateScore();
 
         e.target.value = '';
+
+        time += 5;
     }
 })
 
