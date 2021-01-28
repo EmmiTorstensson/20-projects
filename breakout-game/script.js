@@ -14,7 +14,7 @@ const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     size: 10,
-    speed: 4,
+    speed: 8,
     dx: 4, // Direction to move on x-axel 
     dy: -4, // Direction to move on y-axel 
 }
@@ -81,7 +81,24 @@ function drawBricks() {
     })
 }
 
+// Move paddle on convas 
+function movePaddle() {
+    paddle.x += paddle.dx;
+
+    // Wall ditection 
+    if(paddle.x + paddle.w > canvas.width) {
+        paddle.x = paddle.width - paddle.w;
+    }
+
+    if(paddle.x < 0) {
+        paddle.x = 0;
+    }
+}
+
 function draw() {
+    // clear canvas 
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
     drawBall();
     drawPaddle();
     drawScore();
@@ -94,7 +111,36 @@ function drawScore() {
     ctx.fillText(`Score: ${score}`, canvas.width - 100, 30)
 }
 
-draw();
+
+// update canvas drawing and animation 
+function update() {
+    movePaddle()
+
+    // Draw everything 
+    draw();
+
+    requestAnimationFrame(update)
+}
+
+update();
+
+function keyDown(e) {
+    if(e.key === 'ArrowRight' || e.key === 'Right') {
+        paddle.dx = paddle.speed;
+    } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+        paddle.dx = -paddle.speed
+    }
+}
+
+function keyUp(e) {
+    if(e.key === 'ArrowRight' || e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'Left') {
+        paddle.dx = 0;
+    } 
+}
+
+// Keyboard event handlers
+document.addEventListener('keydown', keyDown) 
+document.addEventListener('keyup', keyUp) 
 
 // Event listeners 
 rulesBtn.addEventListener('click', () => rules.classList.add('show'))
